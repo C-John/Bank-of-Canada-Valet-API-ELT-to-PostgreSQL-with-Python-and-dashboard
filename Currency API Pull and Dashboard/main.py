@@ -12,7 +12,7 @@
 
 # # This Python Project. Copyright (c) 2026 Calder Henry. All rights reserved
 
-import getpass
+# import getpass
 import requests
 import psycopg
 import sys
@@ -54,7 +54,6 @@ def get_connection():
 
     except Exception as error:
         print(f"Error connecting to database: {error}")
-        sys.exit(1)
         return None
 pass
 
@@ -81,53 +80,55 @@ def load_rates(db_connect):
     # The list of tables we expect to see for a complete setup
     required_tables = ['raw_valet_data', 'series_metadata', 'calendar', 'observations']
   
-
-    data = requests.get("https://www.bankofcanada.ca/valet/observations/group/FX_RATES_DAILY/json").json()
-    with db_connect.cursor() as db_cursor:
-        
-        # Pulling what tables are in the database
-        db_cursor.execute("""SELECT table_name 
-                            FROM information_schema.tables 
-                            WHERE table_schema = 'public';""")
-        tables_in_db = [row[0] for row in db_cursor.fetchall()]
-
-        are_all_tables_present = True
-        
-        # Checking if all required tables exist
-        for table_name in required_tables:
-            if table_name not in tables_in_db:
-                are_all_tables_present = False
-                break
-        
-        if are_all_tables_present is False:
-      
-            print("Missing tables detected. Creating missing structures...")
-            # 1. Ensure the staging table exists (just in case it's the one missing)
-            # with db_connect.cursor() as db_cursor:
-            db_cursor.execute("CREATE TABLE IF NOT EXISTS currency_db_elt.public.raw_valet_data (raw_content JSONB);")
+    try:
+        data = requests.get("https://www.bankofcanada.ca/valet/observations/group/FX_RATES_DAILY/json").json()
+        with db_connect.cursor() as db_cursor:
             
-            # # 1. Clean Up Phase
-            # drop 'raw_valet_data', 'series_metadata', 'calendar', 'observations'
-            # then create 'raw_valet_data' again
-            # execute_sql_file(db_connect, 'Clean Up.sql')
-        else:
-            print("All tables present. Appending new data...")
-            # clear staging table
-            db_cursor.execute("TRUNCATE TABLE currency_db_elt.public.raw_valet_data;")
+            # Pulling what tables are in the database
+            db_cursor.execute("""SELECT table_name 
+                                FROM information_schema.tables 
+                                WHERE table_schema = 'public';""")
+            tables_in_db = [row[0] for row in db_cursor.fetchall()]
 
-        # 2. Python Load Phase
-        for series_id in list(data['seriesDetail'].keys()):
-            with requests.get(f"https://www.bankofcanada.ca/valet/observations/{series_id}/json") as response:
-                with db_cursor.copy("COPY raw_valet_data (raw_content) FROM STDIN") as copy:
-                    json_string = json.dumps(response.json())
-                    copy.write(json_string)
-                    print('Complete upload: '+ series_id)
-                db_connect.commit()
+            are_all_tables_present = True
+            
+            # Checking if all required tables exist
+            for table_name in required_tables:
+                if table_name not in tables_in_db:
+                    are_all_tables_present = False
+                    break
+            
+            if are_all_tables_present is False:
+        
+                print("Missing tables detected. Creating missing structures...")
+                # 1. Ensure the staging table exists (just in case it's the one missing)
+                # with db_connect.cursor() as db_cursor:
+                db_cursor.execute("CREATE TABLE IF NOT EXISTS currency_db_elt.public.raw_valet_data (raw_content JSONB);")
+                
+                # # 1. Clean Up Phase
+                # drop 'raw_valet_data', 'series_metadata', 'calendar', 'observations'
+                # then create 'raw_valet_data' again
+                # execute_sql_file(db_connect, 'Clean Up.sql')
+            else:
+                print("All tables present. Appending new data...")
+                # clear staging table
+                db_cursor.execute("TRUNCATE TABLE currency_db_elt.public.raw_valet_data;")
 
-        # 3. Transformation Phase
-        execute_sql_file(db_connect, 'Transform SQL Queries.sql')
-        return True
+            # 2. Python Load Phase
+            for series_id in list(data['seriesDetail'].keys()):
+                with requests.get(f"https://www.bankofcanada.ca/valet/observations/{series_id}/json") as response:
+                    with db_cursor.copy("COPY raw_valet_data (raw_content) FROM STDIN") as copy:
+                        json_string = json.dumps(response.json())
+                        copy.write(json_string)
+                        print('Complete upload: '+ series_id)
+                    db_connect.commit()
 
+            # 3. Transformation Phase
+            execute_sql_file(db_connect, 'Transform SQL Queries.sql')
+            return True
+    except Exception as error:
+        print(f"Error connecting to Valet API: {error}")
+        return None
 pass
 
 def main():
@@ -149,16 +150,11 @@ def main():
     loading_data = load_rates(db_connect)
     if loading_data is True:
         print("Files finish loading")
-
- 
-
-    # Clean up
+        print("ELT complete. Restarting app.py...")
+        # This command starts app.py as a new process
+        # Use 'python' or 'python3' depending on your environment
+        subprocess.Popen(['python', 'app.py'])
         
-    print("ELT complete. Restarting app.py...")
-    # This command starts app.py as a new process
-    # Use 'python' or 'python3' depending on your environment
-    subprocess.Popen(['python', 'app.py'])
-    
     db_connect.close()
     sys.exit(1)
 pass
