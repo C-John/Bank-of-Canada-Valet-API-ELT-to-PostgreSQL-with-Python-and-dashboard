@@ -1,0 +1,17 @@
+ETL ELT Project Proposal
+
+Source: "Data provided by the Bank of Canada."
+	
+	https://www.bankofcanada.ca/valet/observations/group/FX_RATES_DAILY/json
+
+	https://www.bankofcanada.ca/rates/exchange/daily-exchange-rates/
+
+	https://www.bankofcanada.ca/valet/
+
+Extract: Script to pull raw HTML/JSON and save to local storage or a landing table
+
+Load: Python to move raw data into a PostgreSQL "staging" schema
+
+Transform: Use SQL views or procedures within Postgres to clean and structure the data
+
+Infrastructure: Docker Compose to containerize the Python scraper and the Postgres database

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Symbols+Sharp">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Exchange Rate Analysis</title>
+</head>
+<body class="dark-mode-variables">
+    <div class="container">
+        <aside>
+            <div class="sidebar">
+
+                <a href="#" class="active">
+                    <span class="material-symbols-sharp">insights</span>
+                    <h3>Analytics</h3>
+                </a>
+
+                <a href="#">
+                    <span class="material-symbols-sharp">dataset_linked</span>
+                    <h3>Rates Table</h3>
+                </a>
+
+                <div class="dark-mode"> 
+                    <span class="material-symbols-sharp">dark_mode</span>
+                    <span class="material-symbols-sharp active">light_mode</span>
+                </div>
+            </div>
+        </aside>
+
+        <main>
+            <div class="main-header" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+                <h1>Analytics</h1>
+                <div class="dog-profile" style="display: flex; align-items: center; gap: 1rem;">
+                    <div class="info" style="text-align: right;">
+                        <p><b>The Guys</b></p>
+                        <small class="text-muted">Data Engineering</small>
+                    </div>
+                    <div class="profile-photo">
+                        <img src="/static/images/the guys.jpg" style="width: 100%; height: auto; display: block; object-fit: cover;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-buttons">
+                <button data-limit="7">1 Week</button>
+                <button data-limit="30" class="active-btn">1 Month</button>
+                <button data-limit="365">1 Year</button>
+            </div>
+
+            <div class="currency-buttons"></div>
+            
+            <label for="currencySelect">Select Currency:</label>
+                <select id="currencySelect" class="currency-dropdown">
+                </select>
+            
+            <div class="analyse">
+
+                <div class="currency-chart-card">
+                    <canvas id="currencyChart"></canvas>
+                </div>
+                
+            </div>
+
+            <div class="bank-tables">
+                <h2>Exchange Rate Table</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Currency</th>
+                                <th>Rate</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody id="currencyTable"></tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/static/index.js"></script>
+</body>
+</html>

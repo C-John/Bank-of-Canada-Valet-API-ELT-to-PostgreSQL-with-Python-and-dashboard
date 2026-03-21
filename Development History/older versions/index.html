@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Symbols+Sharp" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Exchange Rate Analysis</title>
+
+</head>
+<body>
+    
+    <div class="container">
+        <!-- Sidebar Section -->
+        <aside>
+            <!-- <div class="toggle">
+                <div class="logo">
+                    <img src="images/the guys.jpg">
+                    <h2>Calder Henry<span class="danger">Data Engineering and Analysis</span></h2>
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-symbols-sharp">
+                        close
+                    </span>
+                    <h3>Close</h3>
+                </div>
+            </div> -->
+
+            <div class="sidebar">
+
+                <a href="#" class="active">
+                    <span class="material-symbols-sharp">
+                        insights
+                    </span>
+                    <h3>Analytics</h3>
+                </a>
+
+                <a href="#">
+                    <span class="material-symbols-sharp">
+                        dataset_linked
+                    </span>
+                    <h3>Exchange Rate Tables</h3>
+                </a>
+
+                <!--
+                <a href="#">
+                    <span class="material-symbols-sharp">
+                        person_outline
+                    </span>
+                    <h3>User</h3>
+                </a>
+                <a href="#">
+                    <span class="material-symbols-sharp">
+                        receipt_long
+                    </span>
+                    <h3>History</h3>
+                </a> -->
+ 
+                <!-- <a href="#">
+                    <span class="material-symbols-sharp">
+                        mail_outline
+                    </span>
+                    <h3>Tickets</h3>
+                    <span class="message-count">42</span>
+                </a>
+                <a href="#">
+                    <span class="material-symbols-sharp">
+                        inventory
+                    </span>
+                    <h3>Sale List</h3>
+                </a>
+                <a href="#">
+                    <span class="material-symbols-sharp">
+                        report_gmailerrorred
+                    </span>
+                    <h3>Reports</h3>
+                </a>
+                <a href="#">
+                    <span class="material-symbols-sharp">
+                        settings
+                    </span>
+                    <h3>Settings</h3>
+                </a>
+                <a href="#">
+                    <span class="material-symbols-sharp">
+                        add
+                    </span>
+                    <h3>New Login</h3>
+                </a>
+                <a href="#">
+                    <span class="material-symbols-sharp">
+                        logout
+                    </span>
+                    <h3>Logout</h3>
+                </a> -->
+            </div>
+        </aside>
+        <!-- End of the sidebar section -->
+
+        <main>
+            <h1>Analytics</h1>
+
+            <div class="analyse">
+                
+                <div class="currency-chart-card">
+                    <canvas id="currencyChart"></canvas>
+                </div>
+                <!-- <div class="sales">
+                    <div class="status">
+                        <div class="info">
+                            <h3>Total Sales</h3>
+                            <h1>$777</h1>
+                        </div>
+                        <div class="progress">
+                            <svg>
+                                <circle cx="38" cy="38"
+                                r="36"></circle>
+                            </svg>
+                            <div class="percentage">
+                                <p>+77%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="visits">
+                    <div class="status">
+                        <div class="info">
+                            <h3>Site Visit</h3>
+                            <h1>7,777</h1>
+                        </div>
+                        <div class="progress">
+                            <svg>
+                                <circle cx="38" cy="38"
+                                r="36"></circle>
+                            </svg>
+                            <div class="percentage">
+                                <p>+44%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="searches">
+                    <div class="status">
+                        <div class="info">
+                            <h3>Searches</h3>
+                            <h1>77</h1>
+                        </div>
+                        <div class="progress">
+                            <svg>
+                                <circle cx="38" cy="38"
+                                r="36"></circle>
+                            </svg>
+                            <div class="percentage">
+                                <p>+7%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+            <!-- End of the analysis -->
+
+            <!-- New Users Section-->
+            <!-- <div class="new-users">
+                <h2>New Users</h2>
+                <div class="user-list">
+                    <div class="user">
+                        <img src="images/pubs.jpg">
+                        <h2>PUGGYPANTS!</h2>
+                        <p>77 minutes ago</p>
+                    </div>
+                    <div class="user">
+                        <img src="images/Howard.jpg">
+                        <h2>Howard Howardson</h2>
+                        <p>this morning</p>
+                    </div>
+                    <div class="user">
+                        <img src="images/Ru.jpg">
+                        <h2>Wiggle Pants</h2>
+                        <p>a few days ago</p>
+                    </div>
+                    
+                    <div class="user">
+                        <img src="images/plus.png">
+                        <h2>More</h2>
+                        <p>New User</p>
+                    </div>
+                    
+                </div>
+            </div> -->
+            <!-- End of the New Users Section-->
+
+            <!-- Recent Order Table -->
+             <div class="bank-tables">
+                <h2>Exchange Rate Table</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Currency</th>
+                                <th>Rate</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody id="currencyTable"></tbody>
+                    </table>
+                </div>
+                <a href="#">Show All</a>
+             </div>
+             <!-- End of Order Table -->
+
+        </main>
+        <!-- End of the main content -->
+
+        <!-- Right Section -->
+         <div class="right-section">
+            <div class="nav">
+                <button id="menu-btn">
+                    <span class="material-symbols-sharp">
+                        menu
+                    </span>
+                </button>
+                <div class="dark-mode">
+                    <span class="material-symbols-sharp active">
+                        dark_mode
+                    </span>
+                    <span class="material-symbols-sharp">
+                        light_mode
+                    </span>
+                </div>
+                
+                <!-- <div class="profile">
+                    <div class="info">
+                        <p>Hey, <b>Bub</b></p>
+                        <small class="text-muted">Admin</small>
+                    </div>
+                    <div class="profile-photo">
+                        <img src="images/the guys.jpg">
+                    </div>
+                </div> -->
+
+            </div>
+            <!-- End of the right section -->
+
+            <div class="user-profile">
+                <div class="logo">
+                    <img src="images/the guys.jpg">
+                    <h2>The Guys</h2>
+                    <p>Data Engineering and Analysis</p>
+                </div>
+            </div>
+
+            <!-- <div class="reminders">
+                <div class="header">
+                    <h2>Reminders</h2>
+                    <span class="material-symbols-sharp">
+                        notifications_none
+                    </span>
+                </div>
+
+                <div class="notification">
+                    <div class="icon">
+                        <span class="material-symbols-sharp">
+                            volume_up
+                        </span>
+                    </div>
+                    <div class="content">
+                        <div class="info">
+                            <h3>Workshop</h3>
+                            <small class="text_muted">
+                                08:00 AM - 12:00 pm
+                            </small>
+                        </div>
+                        <span class="material-symbols-sharp">
+                            more_vert
+                        </span>
+                    </div>
+                </div>
+                        
+                <div class="notification deactivation">
+                    <div class="icon">
+                        <span class="material-symbols-sharp">
+                            edit
+                        </span>
+                    </div>
+                    <div class="content">
+                        <div class="info">
+                            <h3>Workshop</h3>
+                            <small class="text_muted">
+                                08:00 AM - 12:00 pm
+                            </small>
+                        </div>
+                        <span class="material-symbols-sharp">
+                            more_vert
+                        </span>
+                    </div>
+                </div>
+            
+                <div class="notification add-reminder">
+                    <span class="material-symbols-sharp">
+                        add
+                    </span>
+                    <h3>Add Reminder</h3>
+                </div> -->
+            
+            </div>
+         </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- <script src="orders.js"></script> -->
+    <script src="index.js"></script>
+
+</body>
+</html>

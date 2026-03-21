@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+    --color-primary: #6C9BCF;
+    --color-white: #fff;
+    --color-dark: #363949;
+    --color-light: rgba(132, 139, 200, 0.18);
+    --color-background: #f6f6f9;
+    --card-border-radius: 2rem;
+    --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+.dark-mode-variables {
+    --color-background: #181a1e;
+    --color-white: #202528;
+    --color-dark: #edeffd;
+    --color-dark-variant: #a3bdcc;
+    --color-light: rgba(0, 0, 0, 0.4);
+    --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; text-decoration: none; border: 0; }
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-dark);
+}
+
+.container {
+    display: grid;
+    width: 98%;
+    margin: 0 auto;
+    gap: 1.8rem;
+    grid-template-columns: 14rem auto;
+}
+
+.profile-photo img {
+    display: block;
+    width: 100%;
+}
+
+.dark-mode{
+    margin-left: auto;
+    padding-right: 1rem;
+}
+
+.dark-mode span {
+    display: none; 
+}
+
+.dark-mode span.active {
+    display: inline-block;
+}
+
+aside .sidebar {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-white);
+    box-shadow: var(--box-shadow);
+    border-radius: 15px;
+    height: auto;
+    padding-bottom: 1rem;
+    position: relative;
+    margin-top: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+aside .sidebar:hover{
+    box-shadow: none;
+}
+
+aside .sidebar a{
+    display: flex;
+    align-items: center;
+    color: var(--color-info-dark);
+    height: 4.5rem;
+    gap: 1.5rem;
+    position: relative;
+    margin-left: 2rem;
+    transition: all 0.3s ease;
+}
+
+aside .sidebar a span{
+    font-size: 1.6rem;
+    transition: all 0.3s ease;
+}
+
+aside .sidebar a:last-child{
+    position: absolute;
+    bottom: 2rem;
+    width: 100%;
+}
+
+aside .sidebar a.active{
+    width: 100%;
+    color: var(--color-primary);
+    background-color: var(--color-light);
+    margin-left: 0;
+}
+
+aside .sidebar a.active span{
+    color: var(--color-primary);
+    margin-left: calc(1rem - 3px);    
+}
+
+aside .sidebar a:hover{
+    color: var(--color-primary);
+}
+
+aside .sidebar a:hover span{
+    margin-left: 0.7rem;
+}
+
+main { margin-top: 1.4rem; min-width: 0; }
+
+/* TABLE FIXES */
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto; /* Allows horizontal scroll inside the card */
+    background: var(--color-white);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+table {
+    width: 100%;
+    min-width: 600px; /* Ensures columns stay readable */
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--color-light);
+}
+
+.currency-chart-card {
+    background: var(--color-white);
+    padding: 2rem;
+    border-radius: var(--card-border-radius);
+    height: 300px;
+}
+
+/* Utility class to hide sections */
+.hide {
+    display: none !important;
+}
+
+/* All date buttons (the 'inactive' state) */
+.filter-buttons button {
+    background: transparent;
+    color: var(--color-info-dark);
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius-1);
+    transition: all 0.3s ease;
+}
+
+/* The 'active' button (the 'active-btn' class added by JS) */
+.filter-buttons button.active-btn {
+    background-color: var(--color-primary);
+    color: white;
+    box-shadow: 0 0.5rem 1rem var(--color-light);
+}
+
+/* Styling for the new Currency Dropdown */
+.currency-dropdown {
+    background-color: var(--color-white); /* Supports Dark Mode automatically */
+    color: var(--color-dark);
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--color-light);
+    cursor: pointer;
+    box-shadow: var(--box-shadow);
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 700px;
+    margin-bottom: 1.5rem;
+}
+
+.currency-dropdown:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0.5rem 1rem var(--color-light);
+}
+
+/* Optional: Style the label for the dropdown */
+label[for="currencySelect"] {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--color-dark);
+}
