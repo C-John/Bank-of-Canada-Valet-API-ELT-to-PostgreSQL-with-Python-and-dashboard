@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+import subprocess
 from dotenv import load_dotenv
 import psycopg
 from flask import Flask, jsonify, request, render_template
@@ -95,4 +96,9 @@ def get_rates():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    api_server.run(host='0.0.0.0', port=5000, debug=True)
+    try:
+        api_server.run(host='0.0.0.0', port=5000, debug=True)
+    finally:
+        print("Shutting down... running cleanup script.")
+        # Ensure the path to your .bat file is correct
+        subprocess.run(['./cleanup.bat'], shell=True)
