@@ -71,7 +71,7 @@ darkMode.addEventListener('click', () => {
     darkMode.querySelector('span:nth-child(2)').classList.toggle('active');
 });
 
-fetch('http://127.0.0.1:5000/api/metadata')
+fetch('/api/metadata')
     .then(response => response.json())
     .then(data => {
         let option_index = 0;
@@ -100,7 +100,7 @@ fetch('http://127.0.0.1:5000/api/metadata')
     })
 
 function updateChartData(currency, limit) {
-    fetch('http://127.0.0.1:5000/api/rates?currency=' + currency + '&limit=' + limit)
+    fetch('/api/rates?currency=' + currency + '&limit=' + limit)
         .then(response => response.json())
         .then(data => {
 
@@ -127,7 +127,7 @@ function updateChartData(currency, limit) {
 }
 
 function updateTableData(currency, limit) {
-    fetch('http://127.0.0.1:5000/api/rates?currency=' + currency + '&limit=' + limit)
+    fetch('/api/rates?currency=' + currency + '&limit=' + limit)
         .then(response => response.json())
         .then(data => {
 
