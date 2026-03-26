@@ -66,13 +66,18 @@ ON CONFLICT DO NOTHING;
 -- JOIN currency_db_elt.public.series_metadata meta ON obs.series_id = meta.series_id
 -- ORDER BY obs.date_id DESC, meta.label ASC;
 
-CREATE VIEW v_daily_exchange_rates AS
+-- Use CASCADE to ensure any dependencies (like other views) are also cleared
+DROP VIEW IF EXISTS currency_db_elt.public.v_daily_exchange_rates CASCADE;
+DROP TABLE IF EXISTS currency_db_elt.public.v_daily_exchange_rates CASCADE;
+
+-- Ensure every table in the JOIN is fully qualified with the schema name
+CREATE VIEW currency_db_elt.public.v_daily_exchange_rates AS
 SELECT 
     obs.date_id AS date,
     obs.series_id,
     meta.label AS currency,
     obs.value AS rate,
     meta.description
-FROM observations obs
-JOIN series_metadata meta ON obs.series_id = meta.series_id
+FROM currency_db_elt.public.observations obs
+JOIN currency_db_elt.public.series_metadata meta ON obs.series_id = meta.series_id
 ORDER BY obs.date_id DESC, meta.label ASC;
