@@ -193,3 +193,36 @@ label[for="currencySelect"] {
     font-weight: 500;
     color: var(--color-dark);
 }
+
+.summary-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+}
+
+.stat-card {
+    background: var(--color-white); /* Adapts to light/dark mode */
+    padding: 1.5rem;
+    border-radius: var(--card-border-radius); /* Matches your other cards */
+    text-align: center;
+    box-shadow: var(--box-shadow); /* Adds the soft floating shadow */
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    box-shadow: none; /* Interactive hover effect like your sidebar */
+}
+
+.stat-card h3 {
+    font-size: 0.9rem;
+    color: var(--color-info-dark); /* Uses your theme's muted text color */
+    margin-bottom: 0.5rem;
+}
+
+.stat-card p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--color-dark); /* Adapts to light/dark mode */
+}

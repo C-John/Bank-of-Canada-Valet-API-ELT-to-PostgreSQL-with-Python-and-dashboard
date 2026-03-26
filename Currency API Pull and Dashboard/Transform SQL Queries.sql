@@ -55,12 +55,24 @@ LATERAL jsonb_each(obs - 'd') AS kv
 WHERE kv.key <> 'd'AND kv.value ? 'v' AND (kv.value->>'v') <> ''
 ON CONFLICT DO NOTHING;
 
-CREATE OR REPLACE VIEW currency_db_elt.public.v_daily_exchange_rates AS
+-- CREATE OR REPLACE VIEW currency_db_elt.public.v_daily_exchange_rates AS
+-- SELECT 
+--     obs.date_id AS date,
+--     obs.series_id,
+--     meta.label AS currency,
+--     obs.value AS rate,
+--     meta.description
+-- FROM currency_db_elt.public.observations obs
+-- JOIN currency_db_elt.public.series_metadata meta ON obs.series_id = meta.series_id
+-- ORDER BY obs.date_id DESC, meta.label ASC;
+
+CREATE VIEW v_daily_exchange_rates AS
 SELECT 
     obs.date_id AS date,
+    obs.series_id,
     meta.label AS currency,
     obs.value AS rate,
     meta.description
-FROM currency_db_elt.public.observations obs
-JOIN currency_db_elt.public.series_metadata meta ON obs.series_id = meta.series_id
+FROM observations obs
+JOIN series_metadata meta ON obs.series_id = meta.series_id
 ORDER BY obs.date_id DESC, meta.label ASC;

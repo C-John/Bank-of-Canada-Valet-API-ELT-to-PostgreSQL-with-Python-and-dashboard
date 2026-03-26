@@ -90,3 +90,18 @@ Theming the Dropdown: Learned to use CSS variables (var(--color-white), var(--co
 The "Handshake": Learned how to use Python's subprocess module to trigger a restart of the app.py script automatically at the end of the ELT process. This ensures the dashboard always reflects the very latest data without manual intervention.
 
 I had to debug variable scope mismatches between my local environment variables and the Python script running inside a Docker exec session." That sounds incredibly impressive.
+
+"During a self-audit of my Bank of Canada ELT pipeline, I identified a silent failure risk in my load_rates function. I'm currently refactoring it to move beyond a simple 'True' return, implementing explicit error catching to ensure the system doesn't just 'do nothing' if the database connection drops."
+
+Log Entry: 2026-03-26 — Secure Isolation & Statistical SummariesThe "Split-Brain" Architecture (Dev Containers): I learned how to move my development environment into an isolated Docker container. This "split-brain" setup keeps my local Windows machine clean of third-party libraries while allowing VS Code to "reach inside" the container to run code.The "Island" Problem (Container Networking): Discovered that containers are isolated "islands" by default. Even if a database is running on the same machine, the Python container can't "see" it without a specific map.The Bridge Fix: I learned to use the WSL Gateway IP (172.17.0.1) and modify the PostgreSQL listen_addresses to allow these isolated environments to communicate securely.Descriptive Statistics: Relearned core statistical concepts by implementing Summary Statistics (Min, Max, Mean, and Range) directly in SQL.The Math of Fluctuation: $\text{Range} = \text{Max} - \text{Min}$. This calculation provides a high-level view of how much a currency has "bounced" since 2017.
+
+The Data Integrity "Bridge" & SQL Views
+
+Labels vs. IDs (The Master Key): I learned a critical Data Engineering rule—never pass front-end "Labels" (like USD/CAD) back to the database for querying. Labels change; Primary Keys do not.
+
+Standardizing the Stack: I fixed a "silent failure" where the dashboard went blank because the UI, Python API, and Database were speaking different languages. By standardizing the entire pipeline to use the series_id (FXUSDCAD), the system is now faster, more reliable, and correctly indexed.
+
+The "Position Trap" in PostgreSQL Views: I discovered that CREATE OR REPLACE VIEW is strict. You cannot insert or reorder columns in an existing view because the database remembers the original blueprint. To change the structure, you must explicitly DROP VIEW first and recreate it from scratch.
+
+API Defaults: I learned to ensure my Python backend has sensible default values (like default='FXUSDCAD') so that if the frontend momentarily sends an empty request, the server doesn't crash trying to look up "undefined."
+

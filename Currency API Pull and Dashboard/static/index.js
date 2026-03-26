@@ -28,6 +28,7 @@ filterButtons.forEach(button => {
         // 3. Call our fetch function with the new limit
         updateChartData(currentCurrency, currentLimit);
         updateTableData(currentCurrency, currentLimit);
+        updateSummaryStats(currentCurrency);
     });
 });
 
@@ -38,6 +39,7 @@ currencySelect.addEventListener('change', (event) => {
     // 2. Refresh the data
     updateChartData(currentCurrency, currentLimit);
     updateTableData(currentCurrency, currentLimit);
+    updateSummaryStats(currentCurrency);
 });
 
 // Set initial state: Start with only the chart visible
@@ -79,14 +81,16 @@ fetch('/api/metadata')
             const opt = document.createElement('option');
             
             // 1. Set the value to the currency label (e.g., 'USD/CAD')
-            opt.value = item.label;
+            // opt.value = item.label;
+            opt.value = item.series_id;
             
             // 2. Set the visible text
             opt.textContent = `${item.label}: ${item.description}`;
             
             // Set the first item as the default selected currency
             if (option_index === 0) {
-                currentCurrency = item.label;
+                // currentCurrency = item.label;
+                currentCurrency = item.series_id;
                 opt.selected = true;
             }
 
@@ -97,6 +101,7 @@ fetch('/api/metadata')
         });
         updateChartData(currentCurrency, currentLimit);
         updateTableData(currentCurrency, currentLimit);
+        updateSummaryStats(currentCurrency);
     })
 
 function updateChartData(currency, limit) {
@@ -144,4 +149,17 @@ function updateTableData(currency, limit) {
             });
         })
         .catch(error => console.error('Error fetching data:', error));
+}
+
+function updateSummaryStats(currency) {
+    fetch(`/api/summary-stats?currency=${currency}`)
+        .then(response => response.json())
+        .then(data => {
+            // Updating the numbers on the screen
+            document.getElementById('stat-average').textContent = data.average;
+            document.getElementById('stat-min').textContent = data.min;
+            document.getElementById('stat-max').textContent = data.max;
+            document.getElementById('stat-range').textContent = data.range;
+        })
+        .catch(error => console.error('Error fetching summary stats:', error));
 }
