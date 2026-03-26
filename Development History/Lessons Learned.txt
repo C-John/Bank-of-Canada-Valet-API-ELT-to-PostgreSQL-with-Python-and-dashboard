@@ -103,5 +103,5 @@ Standardizing the Stack: I fixed a "silent failure" where the dashboard went bla
 
 The "Position Trap" in PostgreSQL Views: I discovered that CREATE OR REPLACE VIEW is strict. You cannot insert or reorder columns in an existing view because the database remembers the original blueprint. To change the structure, you must explicitly DROP VIEW first and recreate it from scratch.
 
-API Defaults: I learned to ensure my Python backend has sensible default values (like default='FXUSDCAD') so that if the frontend momentarily sends an empty request, the server doesn't crash trying to look up "undefined."
+API Defaults: I learned to ensure my Python backend has sensible default values (like default='FXUSDCAD') so that if the frontend momentarily sends an empty request, the server doesn't crash trying to look up "undefined." The view query was provding an error. Updated to drop the view and recreat it with absolute path names for the tables.
 
