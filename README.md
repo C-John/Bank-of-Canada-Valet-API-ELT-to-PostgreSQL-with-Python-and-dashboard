@@ -39,3 +39,9 @@ DB_PORT=5432
     ```URL
     http://localhost:5000
     ```
+5. **Stop & Clean Up:**
+
+    In your `bash` Terminal:
+    ```bash
+    docker compose down
+    ```
