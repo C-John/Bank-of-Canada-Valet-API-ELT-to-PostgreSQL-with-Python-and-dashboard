@@ -3,7 +3,7 @@ services:
     image: postgres:15
     container_name: currency_db
     command: ["postgres", "-c", "listen_addresses=*"]
-    restart: always
+    restart: "no"
     environment:
       # These MUST match what you put in your .env file
       POSTGRES_DB: ${DB_NAME}
