@@ -45,3 +45,7 @@ DB_PORT=5432
     ```bash
     docker compose down
     ```
+
+### Legal & Copyright
+**Copyright (c) 2026 Calder Henry. All rights reserved.**
+*This repository is for portfolio demonstration purposes. No part of this code may be used, modified, or redistributed without explicit permission.*
