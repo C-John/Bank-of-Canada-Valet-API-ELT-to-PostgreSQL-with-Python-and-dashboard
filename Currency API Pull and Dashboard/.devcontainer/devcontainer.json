@@ -13,6 +13,7 @@
         }
     },
     "forwardPorts": [5000],
-    "postCreateCommand": "pip3 install --user -r requirements.txt"
-    "shutdownAction": "stopContainer"
+    "postCreateCommand": "pip3 install --user -r requirements.txt",
+    "shutdownAction": "stopContainer",
+    "runArgs": ["--restart", "no"]
 }
